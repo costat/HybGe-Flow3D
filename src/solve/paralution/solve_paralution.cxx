@@ -1,20 +1,17 @@
-#include "solve_paralution.hpp"
-
-// 1d->2d index
-#define idx2(i, j, ldi) ((i * ldi) + j)
+#include "paralution.hpp"
 
 using namespace paralution;
 
-/** \brief hgf::solve::paralution::init_solver initializes the paralution library.
+/** \brief hgf::solve::init_solver initializes the paralution library.
  * 
  */
 void
-hgf::solve::paralution::init_solver(void)
+hgf::solve::init_solver(void)
 {
   init_paralution();
 }
 
-/** \brief hgf::solve::paralution::solve solves a linear system with a simple GMRES + ILU preconditioning strategy.
+/** \brief hgf::solve::solve solves a linear system with a simple GMRES + ILU preconditioning strategy.
  * 
  * @param[in] par - parameters struct containig basic problem information.
  * @param[in] array - linear system matrix stored in coordinate sparse format.
@@ -22,7 +19,7 @@ hgf::solve::paralution::init_solver(void)
  * @param[out] solution - solution of the system is stored here.
  */
 void
-hgf::solve::paralution::solve(const parameters& par, \
+hgf::solve::solve(const parameters& par, \
   const std::vector< array_coo >& array, \
   const std::vector< double >& rhs, std::vector< double >& solution)
 {
@@ -92,7 +89,7 @@ hgf::solve::paralution::solve(const parameters& par, \
 
 }
 
-/** \brief hgf::solve::paralution::solve_ps_flow solves a linear system with a strategy designed for complex flow problems.
+/** \brief hgf::solve::solve_ps_flow solves a linear system with a strategy designed for complex flow problems.
  * 
  * @param[in] par - parameters struct containig basic problem information.
  * @param[in] array - linear system matrix stored in coordinate sparse format.
@@ -104,7 +101,7 @@ hgf::solve::paralution::solve(const parameters& par, \
  * @param[in] n_p - number of pressure degrees of freedom in the system.
  */
 void 
-hgf::solve::paralution::solve_ps_flow(const parameters& par, \
+hgf::solve::solve_ps_flow(const parameters& par, \
   const std::vector< array_coo >& array, \
   const std::vector< double >& rhs, \
   std::vector<double>& solution, \
@@ -197,11 +194,11 @@ hgf::solve::paralution::solve_ps_flow(const parameters& par, \
 
 }
 
-/** \brief hgf::solve::paralution::finalize_solver closes the paralution library.
+/** \brief hgf::solve::finalize_solver closes the paralution library.
  * 
  */
 void
-hgf::solve::paralution::finalize_solver(void)
+hgf::solve::finalize_solver(void)
 {
   stop_paralution();
 }

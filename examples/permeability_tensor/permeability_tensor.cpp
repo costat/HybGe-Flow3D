@@ -67,29 +67,29 @@ main( int argc, const char* argv[] )
   rebegin = omp_get_wtime();
 
   // Solve with Paralution
-  hgf::solve::paralution::init_solver();
+  hgf::solve::init_solver();
   if (par.dimension == 3) { // block diagonal preconditioner for 3d problem
-    hgf::solve::paralution::solve_ps_flow(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int, \
+    hgf::solve::solve_ps_flow(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int, \
       (int)std::accumulate(x_stks.interior_u.begin(), x_stks.interior_u.end(), 0), \
       (int)std::accumulate(x_stks.interior_v.begin(), x_stks.interior_v.end(), 0), \
       (int)std::accumulate(x_stks.interior_w.begin(), x_stks.interior_w.end(), 0), \
       (int)x_stks.pressure.size());
-    hgf::solve::paralution::solve_ps_flow(par, y_stks.coo_array, y_stks.rhs, y_stks.solution_int, \
+    hgf::solve::solve_ps_flow(par, y_stks.coo_array, y_stks.rhs, y_stks.solution_int, \
       (int)std::accumulate(y_stks.interior_u.begin(), y_stks.interior_u.end(), 0), \
       (int)std::accumulate(y_stks.interior_v.begin(), y_stks.interior_v.end(), 0), \
       (int)std::accumulate(y_stks.interior_w.begin(), y_stks.interior_w.end(), 0), \
       (int)y_stks.pressure.size());
-    hgf::solve::paralution::solve_ps_flow(par, z_stks.coo_array, z_stks.rhs, z_stks.solution_int, \
+    hgf::solve::solve_ps_flow(par, z_stks.coo_array, z_stks.rhs, z_stks.solution_int, \
       (int)std::accumulate(z_stks.interior_u.begin(), z_stks.interior_u.end(), 0), \
       (int)std::accumulate(z_stks.interior_v.begin(), z_stks.interior_v.end(), 0), \
       (int)std::accumulate(z_stks.interior_w.begin(), z_stks.interior_w.end(), 0), \
       (int)x_stks.pressure.size());
   }
   else { // simple GMRES + ILU for 2d
-    hgf::solve::paralution::solve(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int);
-    hgf::solve::paralution::solve(par, y_stks.coo_array, y_stks.rhs, y_stks.solution_int);
+    hgf::solve::solve(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int);
+    hgf::solve::solve(par, y_stks.coo_array, y_stks.rhs, y_stks.solution_int);
   }
-  hgf::solve::paralution::finalize_solver();
+  hgf::solve::finalize_solver();
 
   solve_time = omp_get_wtime() - rebegin;
   rebegin = omp_get_wtime();

@@ -60,10 +60,10 @@ main( int argc, const char* argv[] )
   rebegin = omp_get_wtime();
 
   // solve with Paralution
-  hgf::solve::paralution::init_solver();
+  hgf::solve::init_solver();
   // block diagonal preconditioner for 3d problem
   if (par.dimension == 3) { 
-    hgf::solve::paralution::solve_ps_flow(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int, \
+    hgf::solve::solve_ps_flow(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int, \
       (int)std::accumulate(x_stks.interior_u.begin(), x_stks.interior_u.end(), 0), \
       (int)std::accumulate(x_stks.interior_v.begin(), x_stks.interior_v.end(), 0), \
       (int)std::accumulate(x_stks.interior_w.begin(), x_stks.interior_w.end(), 0), \
@@ -71,9 +71,9 @@ main( int argc, const char* argv[] )
   }
   // simple GMRES + ILU for 2d
   else { 
-    hgf::solve::paralution::solve(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int);
+    hgf::solve::solve(par, x_stks.coo_array, x_stks.rhs, x_stks.solution_int);
   }
-  hgf::solve::paralution::finalize_solver();
+  hgf::solve::finalize_solver();
 
   solve_time = omp_get_wtime() - rebegin;
   rebegin = omp_get_wtime();

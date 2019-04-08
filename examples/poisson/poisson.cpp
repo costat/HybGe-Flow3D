@@ -74,9 +74,9 @@ main( int argc, const char* argv[] )
   rebegin = omp_get_wtime();
 
   // solve with Paralution
-  hgf::solve::paralution::init_solver();
-  hgf::solve::paralution::solve(par, poiss.coo_array, poiss.rhs, poiss.solution);
-  hgf::solve::paralution::finalize_solver();
+  hgf::solve::init_solver();
+  hgf::solve::solve(par, poiss.coo_array, poiss.rhs, poiss.solution);
+  hgf::solve::finalize_solver();
 
   solve_time = omp_get_wtime() - rebegin;
   rebegin = omp_get_wtime();
