@@ -76,6 +76,24 @@ hgf::utility::load_parameters(parameters& par, const bfs::path& problem_path)
   std::string str;
   bfs::ifstream ifs(problem_path);
 
+  while (std::getline(ifs, line))
+  {
+    std::istringstream iss(line);
+    iss >> str;
+    if (!str.compare("length") || !str.compare("length=")) iss >> par.length;
+    else if (!str.compare("width") || !str.compare("width=")) iss >> par.width;
+    else if (!str.compare("height") || !str.compare("height=")) iss >> par.height;
+    else if (!str.compare("solver_max_iterations") || !str.compare("solver_max_iterations=")) iss >> par.solver_max_iterations;
+    else if (!str.compare("solver_absolute_tolerance") || !str.compare("solver_absolute_tolerance=")) iss >> par.solver_absolute_tolerance;
+    else if (!str.compare("solver_relative_tolerance") || !str.compare("solver_relative_tolerance=")) iss >> par.solver_relative_tolerance;
+    else if (!str.compare("solver_verbose") || !str.compare("solver_verbose=")) iss >> par.solver_verbose;
+    else {
+      std::cout << "\nHGF Warning :: input token " << str << " in Parameters.dat is undefined\n";
+    }
+  }
+
+#if 0 // Old code
+
   //--- length ---//
   if (ifs.good())
   {
@@ -151,6 +169,8 @@ hgf::utility::load_parameters(parameters& par, const bfs::path& problem_path)
   }
   std::istringstream isolver_verbose(line);
   isolver_verbose >> str >> par.solver_verbose;
+
+#endif
 
 }
 
