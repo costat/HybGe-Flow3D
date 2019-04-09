@@ -76,6 +76,7 @@ hgf::utility::load_parameters(parameters& par, const bfs::path& problem_path)
   std::string str;
   bfs::ifstream ifs(problem_path);
 
+  // Get the parameters
   while (std::getline(ifs, line))
   {
     std::istringstream iss(line);
@@ -92,85 +93,33 @@ hgf::utility::load_parameters(parameters& par, const bfs::path& problem_path)
     }
   }
 
-#if 0 // Old code
+  // Some basic error checking
 
   //--- length ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream ilength(line);
-  ilength >> str >> par.length;
   if (par.length == 0) {
-    std::cout << "\nLength parameter did not load. Check format of Parameters.dat. Exiting.\n";
-    exit(0);
+    std::cout << "\nHGF Error :: length read is equal to 0.0.\n";
   }
 
   //--- width ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream iwidth(line);
-  iwidth >> str >> par.width;
   if (par.width == 0) {
-    std::cout << "\nWidth parameter did not load. Check format of Parameters.dat. Exiting.\n";
-    exit(0);
+    std::cout << "\nHGF Error :: width read is equal to 0.0.\n"; 
   }
-
-  //--- height ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream iheight(line);
-  iheight >> str >> par.height;
 
   //--- solver_max_iterations ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream isolver_max_iterations(line);
-  isolver_max_iterations >> str >> par.solver_max_iterations;
   if (par.solver_max_iterations == 0) {
-    std::cout << "\nSolver max iteration parameter did not load. Check format of Parameters.dat. Exiting.\n";
-    exit(0);
+    std::cout << "\nHGF Error :: solver max iterations set to 0.\n";
   }
 
   //--- solver_absolute_tolerance ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream isolver_absolute_tolerance(line);
-  isolver_absolute_tolerance >> str >> par.solver_absolute_tolerance;
   if (par.solver_absolute_tolerance == 0) {
-    std::cout << "\nSolver absolute tolerance parameter did not load. Check format of Parameters.dat. Exiting.\n";
-    exit(0);
+    std::cout << "\nHGF Error :: solver absolute tolerance set to 0.0.\n";
   }
 
    //--- solver_relative_tolerance ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream isolver_relative_tolerance(line);
-  isolver_relative_tolerance >> str >> par.solver_relative_tolerance;
   if (par.solver_relative_tolerance == 0) {
-    std::cout << "\nSolver relative tolerance parameter did not load. Check format of Parameters.dat. Exiting.\n";
-    exit(0);
+    std::cout << "\nHGF Error :: solver relative tolerance set to 0.0.\n";
   }
 
-  //--- solver_verbose ---//
-  if (ifs.good())
-  {
-    std::getline(ifs, line);
-  }
-  std::istringstream isolver_verbose(line);
-  isolver_verbose >> str >> par.solver_verbose;
-
-#endif
 
 }
 
