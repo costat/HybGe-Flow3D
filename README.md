@@ -43,7 +43,7 @@ Timothy B. Costa, timothy.costa@numericalsolutions.org
 
 ### Change Log ###
 
-Version 3.0.0 (Beta)
+Version 3.0.0
 - New model: Poisson equation.
     - Model solves the Poisson equation with a tensor alpha coefficient using a cell-centered Finite Volume discretiziation.
         - Beta version requires a diagonal tensor. This will be extended prior to release of 3.0.0.
@@ -52,6 +52,9 @@ Version 3.0.0 (Beta)
 - Added controls to inflow boundary conditions in Stokes Model. 
     - Allows user to control constant or parabolic inflow, as well as the value of the inflow condition. 
     - Requires API change in directional flow boundary condition functions.
+- Added AMGX support.
+    - Default behavior is that when AMGX is found it is used for linear solvers on available NVIDIA GPUs.
+    - If AMGX is not found, HGF will use Paralution.
 
 Version 2.3.1
 - Stokes model unnecessary divides removed.
